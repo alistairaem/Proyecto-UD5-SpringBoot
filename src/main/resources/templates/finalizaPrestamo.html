@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='Finaliza Prestamo')"></head>
+
+<body>
+<nav th:replace="fragments :: nav"></nav>
+<div class="container-fluid">
+    <h2 text="Finalizar prestamo"></h2>
+    <form method="post" th:action="@{/{user}/prestamo/{id}/finalizar(id=${prestamo.getIdPrestamo()}, user=${usuario.id})}" th:object="${prestamoData}">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="fechaInicio">Fecha de inicio:</label>
+                <input class="form-control" id="fechaInicio" name="fechaInicio" required th:field="*{fechaInicio}" type="date" disabled/>
+            </div>
+            <div class="form-group">
+                <label for="fechaFin">Fecha de finalización:</label>
+                <input class="form-control" id="fechaFin" name="fechaFin" required th:field="*{fechaFin}" type="date" disabled/>
+            </div>
+            <button class="btn btn-danger" type="submit">Finalizar prestamo</button>
+            <a class="btn btn-link" th:href="@{/{id}/prestamo/lista(id=${usuario.id})}">Cancelar</a>
+        </div>
+    </form>
+</div>
+<div th:replace="fragments::javascript"/>
+</body>
+</html>

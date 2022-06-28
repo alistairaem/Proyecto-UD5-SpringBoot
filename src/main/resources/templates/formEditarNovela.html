@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='Editar Novela')"></head>
+
+<body>
+<nav th:replace="fragments :: nav"></nav>
+<div class="container-fluid">
+    <h2 th:text="'Modificación de la novela ' + ${novela.getTitulo()}"></h2>
+    <form method="post" th:action="@{/{user}/novela/{id}/editar(id=${novela.getIdLibro()}, user=${usuario.id})}" th:object="${novelaData}">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="titulo">Titulo:</label>
+                <input class="form-control" id="titulo" name="titulo" required th:field="*{titulo}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="fechaPublicacion">fechaPublicacion:</label>
+                <input class="form-control" id="fechaPublicacion" name="fechaPublicacion" required
+                       th:field="*{fechaPublicacion}" type="date"/>
+            </div>
+            <div class="form-group">
+                <label for="LongitudImpresion">LongitudImpresion:</label>
+                <input class="form-control" id="LongitudImpresion" name="LongitudImpresion" required
+                       th:field="*{LongitudImpresion}" type="number"/>
+            </div>
+            <div class="form-group">
+                <label for="editorial">editorial:</label>
+                <input class="form-control" id="editorial" name="editorial" required th:field="*{editorial}"
+                       type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="autor">autor:</label>
+                <input class="form-control" id="autor" name="autor" required th:field="*{autor}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="tema">tema:</label>
+                <input class="form-control" id="tema" name="tema" required th:field="*{tema}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="subgenero">tema:</label>
+                <input class="form-control" id="subgenero" name="subgenero" required th:field="*{subgenero}"
+                       type="text"/>
+            </div>
+            <button class="btn btn-primary" type="submit">Modificar novela</button>
+            <a class="btn btn-link" th:href="@{/{id}/novela/lista(id=${usuario.id})}">Cancelar</a>
+        </div>
+    </form>
+</div>
+<div th:replace="fragments::javascript"/>
+</body>
+</html>

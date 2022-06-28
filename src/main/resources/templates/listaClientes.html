@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='Lista Clientes')"></head>
+
+<body>
+<nav th:replace="fragments::nav"/>
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col">
+            <h2 th:text="'Listado de Clientes'"></h2>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Dni</th>
+                    <th>Direccion</th>
+                    <th>Edad</th>
+                    <th colspan="2">Opciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cliente: ${clientes}">
+                    <td th:text="${cliente.nombre}"></td>
+                    <td th:text="${cliente.apellido}"></td>
+                    <td th:text="${cliente.dni}"></td>
+                    <td th:text="${cliente.direccion}"></td>
+                    <td th:text="${cliente.edad}"></td>
+                    <td><span><a class="btn btn-info" role="button"
+                                 th:href="@{/{user}/cliente/{id}/editar(id=${cliente.getIdCliente()}, user=${usuario.id})}">Modificar</a></span>
+                    </td>
+                    <td><span><a class="btn btn-info" role="button"
+                                 th:href="@{/{user}/cliente/{id}/prestamos(id=${cliente.getIdCliente()}, user=${usuario.id})}">Prestamos</a></span>
+                    </td>
+                    <td><span><a class="btn btn-danger" role="button"
+                                 th:href="@{/{user}/cliente/{id}/eliminar(id=${cliente.getIdCliente()}, user=${usuario.id})}">Eliminar</a></span>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <a class="btn btn-success" role="button" th:href="@{/{id}/cliente/nuevo(id=${usuario.id})}">Nuevo cliente</a></span></td>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                 th:if="${!#strings.isEmpty(mensaje)}">
+                <span th:text="${mensaje}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments::javascript"/>
+</body>
+</html>

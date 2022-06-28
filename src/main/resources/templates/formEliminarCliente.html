@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='Eliminar Cliente')"></head>
+
+<body>
+<nav th:replace="fragments :: nav"></nav>
+<div class="container-fluid">
+    <h2 th:text="'Eliminar cliente ' + ${cliente.getNombre()}"></h2>
+    <form method="post" th:action="@{/{user}/cliente/{id}/eliminar(id=${cliente.getIdCliente()}, user=${usuario.id})}" th:object="${clienteData}">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input class="form-control" id="nombre" name="nombre" required th:field="*{nombre}" type="text" disabled/>
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input class="form-control" id="apellido" name="apellido" required th:field="*{apellido}" type="text" disabled/>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Direccion:</label>
+                <input class="form-control" id="direccion" name="direccion" required th:field="*{direccion}" type="text" disabled/>
+            </div>
+            <div class="form-group">
+                <label for="direccion">DNI:</label>
+                <input class="form-control" id="dni" name="dni" required th:field="*{dni}" type="text" disabled/>
+            </div>
+            <div class="form-group">
+                <label for="edad">Edad:</label>
+                <input class="form-control" id="edad" name="edad" required th:field="*{edad}" type="number" disabled/>
+            </div>
+            <button class="btn btn-danger" type="submit">Eliminar cliente</button>
+            <a class="btn btn-link" th:href="@{/{id}/cliente/lista(id=${usuario.id})}">Cancelar</a>
+        </div>
+    </form>
+</div>
+<div th:replace="fragments::javascript"/>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head (titulo)">
+    <meta charset="UTF-8"/>
+    <title th:text="${titulo}"></title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/commonStyle.css}">
+</head>
+
+<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div id="nav-content">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="navbar-brand" th:href="@{/{id}/inicio(id=${usuario.id})}">Biblioteca</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Libros
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/{id}/novela/lista(id=${usuario.id})}">Novelas</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/{id}/manga/lista(id=${usuario.id})}">Mangas</a>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/{id}/revista/lista(id=${usuario.id})}">Revistas</a>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/{id}/prestamo/lista(id=${usuario.id})}">Préstamos</a>
+                </li>
+                <div th:if="${usuario.getAdmin() == 1}">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/{id}/cliente/lista(id=${usuario.id})}">Clientes</a>
+                    </li>
+                </div>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div th:fragment="javascript">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</div>
+
+</html>

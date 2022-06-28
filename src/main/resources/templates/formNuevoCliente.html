@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='CrearCliente')"></head>
+
+<body>
+<div class="container-fluid">
+
+    <h2 th:text="'Nuevo cliente '"></h2>
+
+    <form method="post" th:action="@{/{id}/cliente/nuevo(id=${usuario.id})}" th:object="${clienteData}">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input class="form-control" id="nombre" name="nombre" required th:field="*{nombre}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input class="form-control" id="apellido" name="apellido" required th:field="*{apellido}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="dni">Dni:</label>
+                <input class="form-control" id="dni" name="dni" required th:field="*{dni}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Direccion:</label>
+                <input class="form-control" id="direccion" name="direccion" required th:field="*{direccion}"
+                       type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="edad">Edad:</label>
+                <input class="form-control" id="edad" name="edad" required th:field="*{edad}" type="number"/>
+            </div>
+            <button class="btn btn-primary" type="submit">Crear cliente</button>
+        </div>
+    </form>
+    <div class="row mt-2">
+        <div class="col">
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                 th:if="${!#strings.isEmpty(mensaje)}">
+                <span th:text="${mensaje}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments::javascript"/>
+
+</body>
+</html>

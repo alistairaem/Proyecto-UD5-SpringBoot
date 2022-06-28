@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='Lista Mangas')"></head>
+
+<body>
+<nav th:replace="fragments::nav"/>
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col">
+            <h2 th:text="'Listado de Mangas'"></h2>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Isbn</th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Demografía</th>
+                    <th>Género</th>
+                    <div th:if="${usuario.getAdmin() == 1}">
+                        <th colspan="2">Opciones</th>
+                    </div>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="manga: ${mangas}">
+                    <td th:text="${manga.isbn}"></td>
+                    <td th:text="${manga.titulo}"></td>
+                    <td th:text="${manga.autor}"></td>
+                    <td th:text="${manga.demografia}"></td>
+                    <td th:text="${manga.genero}"></td>
+                    <div th:if="${usuario.getAdmin() == 1}">
+                        <td><span><a class="btn btn-info" role="button"
+                                     th:href="@{/{user}/manga/{id}/editar(id=${manga.getIdLibro()}, user=${usuario.id})}">Modificar</a></span></td>
+                        <td><span><a class="btn btn-danger" role="button"
+                                     th:href="@{/{user}/manga/{id}/eliminar(id=${manga.getIdLibro()}, user=${usuario.id})}">Eliminar</a></span></td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+            <div th:if="${usuario.getAdmin() == 1}">
+                <div>
+                    <a class="btn btn-success" role="button" th:href="@{/{id}/manga/nuevo(id=${usuario.id})}">Nuevo manga</a></span></td>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                 th:if="${!#strings.isEmpty(mensaje)}">
+                <span th:text="${mensaje}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments::javascript"/>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='CrearNovela')"></head>
+
+<body>
+<div class="container-fluid">
+
+    <h2 th:text="'Nueva novela '"></h2>
+
+    <form method="post" th:action="@{/{id}/novela/nueva(id=${usuario.id})}" th:object="${novelaData}">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="isbn">ISBN:</label>
+                <input class="form-control" id="isbn" name="isbn" required th:field="*{isbn}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="titulo">Titulo:</label>
+                <input class="form-control" id="titulo" name="titulo" required th:field="*{titulo}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="fechaPublicacion">Fecha de publicación:</label>
+                <input class="form-control" id="fechaPublicacion" name="fechaPublicacion" required
+                       th:field="*{fechaPublicacion}" type="date"/>
+            </div>
+            <div class="form-group">
+                <label for="LongitudImpresion">Longitud de impresion:</label>
+                <input class="form-control" id="LongitudImpresion" name="LongitudImpresion" required
+                       th:field="*{LongitudImpresion}" type="number"/>
+            </div>
+            <div class="form-group">
+                <label for="editorial">Editorial:</label>
+                <input class="form-control" id="editorial" name="editorial" required th:field="*{editorial}"
+                       type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="autor">Autor:</label>
+                <input class="form-control" id="autor" name="autor" required th:field="*{autor}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="tema">Tema:</label>
+                <input class="form-control" id="tema" name="tema" required th:field="*{tema}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="subgenero">Sub-género:</label>
+                <input class="form-control" id="subgenero" name="subgenero" required th:field="*{subgenero}"
+                       type="text"/>
+            </div>
+            <button class="btn btn-primary" type="submit">Crear novela</button>
+        </div>
+    </form>
+    <div class="row mt-2">
+        <div class="col">
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                 th:if="${!#strings.isEmpty(mensaje)}">
+                <span th:text="${mensaje}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments::javascript"/>
+
+</body>
+</html>

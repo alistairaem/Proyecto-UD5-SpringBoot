@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='Lista Prestamos')"></head>
+
+<body>
+<nav th:replace="fragments::nav"/>
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col">
+            <h2 th:text="'Listado de Prestamos'"></h2>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Fecha de inicio</th>
+                    <th>Fecha límite</th>
+                    <th>Devuelto</th>
+                    <th>Fecha de devolución</th>
+                    <th>Libros</th>
+                    <th colspan="2">Opciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prestamo: ${prestamos}">
+                    <td th:text="${prestamo.fechaInicio}"></td>
+                    <td th:text="${prestamo.fechaFin}"></td>
+                    <td th:text="${prestamo.devuelto}"></td>
+                    <td th:text="${prestamo.fechaDevolucion}"></td>
+                    <td th:text="${prestamo.getlLibros()}"></td>
+                    <td th:if="${prestamo.getDevuelto() == true}">
+                        <span><button class="btn btn-info" role="button" disabled>Finalizar</button></span>
+                    </td>
+                    <td th:if="${prestamo.getDevuelto() == false}">
+                        <span><a class="btn btn-info" role="button"
+                                 th:href="@{/{user}/prestamo/{id}/finalizar(id=${prestamo.getIdPrestamo()}, user=${usuario.id})}">Finalizar</a></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="nav">
+                <div th:if="${usuario.getAdmin() == 1}">
+                    <span>
+                        <a class="btn btn-success" role="button" th:href="@{/{id}/prestamo/nuevo(id=${usuario.id})}">Nuevo prestamo</a></span></td>
+                    </span>
+                    <span>
+                        <a class="btn btn-info" role="button" th:href="@{/{id}/prestamo/lista/semana(id=${usuario.id})}">Finalizan esta semana</a></span></td>
+                    </span>
+                </div>
+                <span>
+                    <a class="btn btn-info" role="button" th:href="@{/{id}/prestamo/lista/sindevolver(id=${usuario.id})}">Sin devolver</a></span></td>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                 th:if="${!#strings.isEmpty(mensaje)}">
+                <span th:text="${mensaje}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments::javascript"/>
+</body>
+</html>

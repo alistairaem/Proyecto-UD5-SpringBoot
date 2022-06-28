@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='CrearManga')"></head>
+
+<body>
+<div class="container-fluid">
+
+    <h2 th:text="'Nuevo manga '"></h2>
+
+    <form method="post" th:action="@{/{id}/manga/nuevo(id=${usuario.id})}" th:object="${mangaData}">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="isbn">ISBN:</label>
+                <input class="form-control" id="isbn" name="isbn" required th:field="*{isbn}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="titulo">Titulo:</label>
+                <input class="form-control" id="titulo" name="titulo" required th:field="*{titulo}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="fechaPublicacion">Fecha de publicación:</label>
+                <input class="form-control" id="fechaPublicacion" name="fechaPublicacion" required
+                       th:field="*{fechaPublicacion}" type="date"/>
+            </div>
+            <div class="form-group">
+                <label for="LongitudImpresion">Longitud de impresion:</label>
+                <input class="form-control" id="LongitudImpresion" name="LongitudImpresion" required
+                       th:field="*{LongitudImpresion}" type="number"/>
+            </div>
+            <div class="form-group">
+                <label for="editorial">Editorial:</label>
+                <input class="form-control" id="editorial" name="editorial" required th:field="*{editorial}"
+                       type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="autor">Autor:</label>
+                <input class="form-control" id="autor" name="autor" required th:field="*{autor}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="demografia">Demografía:</label>
+                <input class="form-control" id="demografia" name="demografia" required th:field="*{demografia}"
+                       type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="genero">Género:</label>
+                <input class="form-control" id="genero" name="genero" required th:field="*{genero}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="color">A Color:</label>
+                <input class="form-control" id="color" name="color" th:field="*{color}" type="checkbox"/>
+            </div>
+            <button class="btn btn-primary" type="submit">Crear manga</button>
+        </div>
+    </form>
+    <div class="row mt-2">
+        <div class="col">
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                 th:if="${!#strings.isEmpty(mensaje)}">
+                <span th:text="${mensaje}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments::javascript"/>
+
+</body>
+</html>
